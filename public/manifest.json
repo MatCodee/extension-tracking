@@ -1,18 +1,48 @@
 {
-    "manifest_version":3,
+    "manifest_version": 3,
     "version": "1.0.0",
-    "name": "tracking",
+    "name": "Web Time Tracker",
+    "description": "Track time spent on different website categories",
+    "icons": {
+        "16": "vite.svg",
+        "48": "vite.svg",
+        "128": "vite.svg"
+    },
     "action": {
-        "default_popup": "index.html"
+        "default_popup": "index.html",
+        "default_icon": "vite.svg"
     },
     "permissions": [
-        "scripting"
+        "scripting",
+        "tabs",
+        "activeTab",
+        "storage"
     ],
     "host_permissions": [
         "http://*/",
         "https://*/"
     ],
     "background": {
-        "service_worker": "services/background.js"
-    }
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "popup.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
 }
